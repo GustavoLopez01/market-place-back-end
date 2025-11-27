@@ -72,7 +72,7 @@ export class UsersController {
     });
   }
 
-  @Put()
+  @Put('/:id')
   async update(
     @Param('id', new ParseIntPipe({
       errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE

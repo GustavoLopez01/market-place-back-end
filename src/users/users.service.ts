@@ -72,7 +72,8 @@ export class UsersService {
       }, {
         where: {
           id
-        }
+        },
+        individualHooks: true
       });
 
       return user;
