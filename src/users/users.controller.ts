@@ -7,13 +7,12 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  Req,
   Res,
   ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 import { Public } from 'src/auth/isPublic';
 import { User } from './user.entity';
 

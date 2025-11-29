@@ -8,7 +8,9 @@ import {
   BeforeUpdate
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
-@Table
+@Table({
+  tableName: 'users'
+})
 export class User extends Model {
 
   @Column({
