@@ -16,7 +16,9 @@ export class UsersService {
   ) { }
 
   async getAll(): Promise<User[] | null> {
-    return await this.userRepository.findAll();
+    return await this.userRepository.findAll({
+      attributes: ['id', 'name', 'phoneNumber', 'lastName', 'isEnabled']
+    });
   }
 
   async findById(id: User['id']): Promise<User | null> {
@@ -24,7 +26,8 @@ export class UsersService {
       return await this.userRepository.findOne({
         where: {
           id
-        }
+        },
+        attributes: ['id', 'name', 'lastName']
       });
     } catch (error) {
       console.error(`Ocurrió un error al obtener al usuario : ${error}`);

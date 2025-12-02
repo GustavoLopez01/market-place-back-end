@@ -2,11 +2,12 @@
 import {
   IsString,
   IsNumber,
+  IsNotEmpty,
 } from 'class-validator';
 
 export class CreateProduct {
   @IsString({
-    message: 'El Nombre debe ser una cadena de caracteres'
+    message: 'El nombre debe ser una cadena de caracteres'
   })
   name: string;
 
@@ -20,10 +21,10 @@ export class CreateProduct {
   })
   quantity: number;
 
-  @IsString({
-    message: 'La categoria debe ser una cadena de caracteres'
+  @IsNotEmpty({
+    message: 'El id de la categoria no debe ser vacío'
   })
-  category: string;
+  categoryId: Number;
 
   @IsString({
     message: 'La descripción debe ser una cadena de caracteres'

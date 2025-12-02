@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { Product } from './product.entity';
 import { CreateProduct } from './dto/product.dto';
+import { Category } from 'src/categories/category.entity';
 
 @Injectable()
 export class ProductsService {
@@ -14,7 +15,9 @@ export class ProductsService {
   ) { }
 
   async getAll(): Promise<Product[] | null> {
-    return await this.productRepository.findAll();
+    return await this.productRepository.findAll({
+      include: [Category]
+    });
   }
 
   async findById(id: Product['id']): Promise<Product | null> {
@@ -67,7 +70,7 @@ export class ProductsService {
   async delete(id: Product['id']) {
     try {
       const existProduct = await this.productRepository.findByPk(id);
-      if(!existProduct)  return null;
+      if (!existProduct) return null;
       return await existProduct.destroy();
     } catch (error) {
       console.error(`Ocurrió un error al eliminar el producto : ${error}`);
