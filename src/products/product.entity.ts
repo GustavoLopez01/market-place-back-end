@@ -3,8 +3,11 @@ import {
   DataType,
   Table,
   Model,
-  Unique
+  Unique,
+  BelongsTo,
+  ForeignKey
 } from 'sequelize-typescript';
+import { Category } from 'src/categories/category.entity';
 
 @Table({
   tableName: 'products'
@@ -30,15 +33,17 @@ export class Product extends Model {
   @Column({
     type: DataType.STRING
   })
-  declare category: string;
-
-  @Column({
-    type: DataType.STRING
-  })
   declare description: string;
 
   @Column({
     type: DataType.STRING
   })
-  declare image: string
+  declare image: string;
+
+  @ForeignKey(() => Category)
+  @Column
+  declare categoryId: number;
+
+  @BelongsTo(() => Category)
+  declare category: Category;
 }

@@ -6,12 +6,13 @@ import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
 import { ProductsController } from './products/products.controller';
 import { ProductsModule } from './products/products.module';
+import { CategoriesModule } from './categories/categories.module';
 @Module({
   imports: [
     AuthModule, 
     UsersModule, 
     DatabaseModule, 
-    ProductsModule
+    ProductsModule, CategoriesModule
   ],
   controllers: [AppController, ProductsController],
   providers: [AppService],
