@@ -7,14 +7,17 @@ import { DatabaseModule } from './database/database.module';
 import { ProductsController } from './products/products.controller';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
+import { OrdersModule } from './orders/orders.module';
 @Module({
   imports: [
-    AuthModule, 
-    UsersModule, 
-    DatabaseModule, 
-    ProductsModule, CategoriesModule
+    AuthModule,
+    UsersModule,
+    DatabaseModule,
+    ProductsModule,
+    CategoriesModule,
+    OrdersModule
   ],
   controllers: [AppController, ProductsController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
