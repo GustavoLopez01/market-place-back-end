@@ -3,6 +3,7 @@ import { Category } from 'src/categories/category.entity';
 import { Order } from 'src/orders/order.entity';
 import { OrderProducts } from 'src/orders/orderProduct.entity';
 import { Product } from 'src/products/product.entity';
+import { Rol } from 'src/roles/rol.entity';
 import { User } from 'src/users/user.entity';
 
 export const databaseProviders = [
@@ -20,7 +21,8 @@ export const databaseProviders = [
       sequelize.addModels([
         User,
         Order,
-        Product, 
+        Product,
+        Rol,
         Category,
         OrderProducts,
       ]);

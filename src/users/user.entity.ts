@@ -5,9 +5,12 @@ import {
   Table,
   Unique,
   BeforeCreate,
-  BeforeUpdate
+  BeforeUpdate,
+  ForeignKey,
+  BelongsTo
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
+import { Rol } from 'src/roles/rol.entity';
 @Table({
   tableName: 'users'
 })
@@ -43,6 +46,13 @@ export class User extends Model {
     type: DataType.BOOLEAN
   })
   declare isEnabled: boolean;
+
+  @ForeignKey(() => Rol)
+  @Column
+  declare rolId: number;
+
+  @BelongsTo(() => Rol)
+  declare rol: Rol;
 
   @BeforeCreate
   @BeforeUpdate
