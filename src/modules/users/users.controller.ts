@@ -13,7 +13,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import type { Response } from 'express';
-import { Public } from 'src/auth/isPublic';
+import { Public } from '../auth/isPublic';
 import { User } from './user.entity';
 
 @Controller('users')

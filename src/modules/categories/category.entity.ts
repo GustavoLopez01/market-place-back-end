@@ -6,7 +6,7 @@ import {
   HasMany,
   Table
 } from 'sequelize-typescript';
-import { Product } from 'src/products/product.entity';
+import { Product } from 'src/modules/products/product.entity';
 
 @Table({
   tableName: 'categories'

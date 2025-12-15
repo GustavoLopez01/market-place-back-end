@@ -7,7 +7,7 @@ import {
   BelongsTo,
   ForeignKey
 } from 'sequelize-typescript';
-import { Category } from 'src/categories/category.entity';
+import { Category } from 'src/modules/categories/category.entity';
 
 @Table({
   tableName: 'products'

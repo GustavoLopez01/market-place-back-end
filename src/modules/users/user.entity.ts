@@ -10,7 +10,7 @@ import {
   BelongsTo
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
-import { Rol } from 'src/roles/rol.entity';
+import { Rol } from 'src/modules/roles/rol.entity';
 @Table({
   tableName: 'users'
 })

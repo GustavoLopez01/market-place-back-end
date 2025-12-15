@@ -13,7 +13,7 @@ import {
 import { RolesService } from './roles.service';
 import { Rol } from './rol.entity';
 import type { Response } from 'express';
-import { Public } from 'src/auth/isPublic';
+import { Public } from '../auth/isPublic';
 
 @Controller('roles')
 export class RolesController {

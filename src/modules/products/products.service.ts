@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { Product } from './product.entity';
 import { CreateProduct } from './dto/product.dto';
-import { Category } from 'src/categories/category.entity';
+import { Category } from 'src/modules/categories/category.entity';
 
 @Injectable()
 export class ProductsService {
