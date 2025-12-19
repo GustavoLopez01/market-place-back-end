@@ -7,10 +7,12 @@ import {
   BeforeCreate,
   BeforeUpdate,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
+  HasMany
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 import { Rol } from 'src/modules/roles/rol.entity';
+import { UserAddresses } from '../user_addresses/userAddress.entity';
 @Table({
   tableName: 'users'
 })
@@ -53,6 +55,9 @@ export class User extends Model {
 
   @BelongsTo(() => Rol)
   declare rol: Rol;
+
+  @HasMany(() => UserAddresses)
+  declare addresses: UserAddresses[];
 
   @BeforeCreate
   @BeforeUpdate

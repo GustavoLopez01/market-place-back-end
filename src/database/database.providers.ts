@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import { UserAddresses } from 'src/modules/user_addresses/userAddress.entity';
 import { Category } from 'src/modules/categories/category.entity';
 import { Order } from 'src/modules/orders/order.entity';
 import { OrderProducts } from 'src/modules/orders/orderProduct.entity';
@@ -22,6 +23,7 @@ export const databaseProviders = [
         User,
         Order,
         Product,
+        UserAddresses,
         Rol,
         Category,
         OrderProducts,

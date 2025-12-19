@@ -51,7 +51,7 @@ export class ProductsService {
     }
   }
 
-  async update(id: Product['id'], product: CreateProduct) {
+  async update(id: Product['id'], product: CreateProduct): Promise<Product | null> {
     try {
       const existProduct = await this.productRepository.findByPk(id);
       if (!existProduct) return null;
@@ -67,11 +67,12 @@ export class ProductsService {
     }
   }
 
-  async delete(id: Product['id']) {
+  async delete(id: Product['id']): Promise<null | boolean> {
     try {
       const existProduct = await this.productRepository.findByPk(id);
       if (!existProduct) return null;
-      return await existProduct.destroy();
+      await existProduct.destroy();
+      return true;
     } catch (error) {
       console.error(`Ocurrió un error al eliminar el producto : ${error}`);
       throw new BadRequestException(`Ocurrió un error al eliminar el producto : ${error}`);
