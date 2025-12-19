@@ -6,9 +6,9 @@ import {
   Model,
   Table
 } from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/modules/users/user.entity';
 import { OrderProducts } from './orderProduct.entity';
-import { Product } from 'src/products/product.entity';
+import { Product } from 'src/modules/products/product.entity';
 
 @Table({
   tableName: 'orders'

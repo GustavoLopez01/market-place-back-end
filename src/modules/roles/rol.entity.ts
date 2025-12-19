@@ -5,7 +5,7 @@ import {
   Model,
   Table
 } from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
+import { User } from 'src/modules/users/user.entity';
 
 @Table({
   tableName: 'roles'

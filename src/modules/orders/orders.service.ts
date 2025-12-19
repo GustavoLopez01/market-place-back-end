@@ -1,6 +1,6 @@
-import { 
-  BadRequestException, 
-  Inject, 
+import {
+  BadRequestException,
+  Inject,
   Injectable
 } from '@nestjs/common';
 import { Order } from './order.entity';
@@ -14,11 +14,11 @@ export class OrdersService {
     private orderRepository: typeof Order
   ) { }
 
-  async getAll() {
+  async getAll(): Promise<Order[] | null> {
     return this.orderRepository.findAll();
   }
 
-  async findById(id: Order['id']) {
+  async findById(id: Order['id']): Promise<Order | null | undefined> {
     try {
       return await this.orderRepository.findByPk(id);
     } catch (error) {
@@ -26,7 +26,7 @@ export class OrdersService {
     }
   }
 
-  async save(order: CreateOrder) {
+  async save(order: CreateOrder): Promise<Order | null> {
     try {
       const response = await this.orderRepository.create({
         ...order
@@ -48,7 +48,7 @@ export class OrdersService {
     }
   }
 
-  async update(id: Order['id'], order: CreateOrder) {
+  async update(id: Order['id'], order: CreateOrder): Promise<null | number> {
     try {
       const existOrder = await this.orderRepository.findByPk(id);
       if (!existOrder) return null;
@@ -60,21 +60,22 @@ export class OrdersService {
           id
         }
       });
-      return response;
+      return response[0];
     } catch (error) {
       console.error(`Ocurrió un error al actualizar la orden : ${error}`);
       throw new BadRequestException(`Ocurrió un error al actualizar la orden : ${error}`);
     }
   }
 
-  async delete(id: Order['id']) {
+  async delete(id: Order['id']): Promise<null | boolean> {
     try {
       const existOrder = await this.orderRepository.findByPk(id);
       if (!existOrder) return null;
 
-      return await this.orderRepository.destroy({
+      await this.orderRepository.destroy({
         where: { id }
       });
+      return true;
     } catch (error) {
       console.error(`Ocurrió un error al eliminar la orden: ${error}`);
       throw new BadRequestException(`Ocurrió un error al eliminar la orden: ${error}`);

@@ -5,7 +5,7 @@ import {
   Table
 } from 'sequelize-typescript';
 import { Order } from './order.entity';
-import { Product } from 'src/products/product.entity';
+import { Product } from 'src/modules/products/product.entity';
 
 @Table({
   tableName: 'order_products'
