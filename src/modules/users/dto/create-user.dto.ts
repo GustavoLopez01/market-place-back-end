@@ -1,36 +1,34 @@
 import {
   IsString,
-  IsBoolean
+  IsBoolean,
+  IsEmail,
+  IsNotEmpty
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsString({
-    message: 'El Nombre debe ser una cadena de caracteres'
-  })
+
+  @IsNotEmpty({ message: 'El nombre es obligatorio.' })
+  @IsString({ message: 'El Nombre debe ser una cadena de caracteres.' })
   name: string;
 
-  @IsString({
-    message: 'El correo electrónico debe ser una cadena de caracteres'
-  })
+  @IsNotEmpty({ message: 'El correo electrónico es obligatorio.' })
+  @IsString({ message: 'El correo electrónico debe ser una cadena de caracteres.' })
+  @IsEmail({}, { message: 'El correo electrónico no es válido.' })
   email: string;
 
-  @IsString({
-    message: 'El telefono debe ser una cadena de caracteres'
-  })
+  @IsNotEmpty({ message: 'El teléfono es obligatorio.' })
+  @IsString({ message: 'El teléfono debe ser una cadena de caracteres.' })
   phoneNumber: string;
 
-  @IsString({
-    message: 'El apellido debe ser una cadena de caracteres'
-  })
+  @IsNotEmpty({ message: 'El apellido es obligatorio.' })
+  @IsString({ message: 'El apellido debe ser una cadena de caracteres.' })
   lastName: string;
 
-  @IsString({
-    message: 'La contraseña debe ser una cadena de caracteres'
-  })
+  @IsNotEmpty({ message: 'La contrasea es obligatoria.' })
+  @IsString({ message: 'La contraseña debe ser una cadena de caracteres.' })
   password: string;
 
-  @IsBoolean({
-    message: 'El estado debe ser un boleano'
-  })
+  @IsNotEmpty({ message: 'El estado es obligatorio.' })
+  @IsBoolean({ message: 'El estado debe ser un boleano.' })
   isEnabled: boolean;
 }

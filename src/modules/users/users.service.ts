@@ -17,7 +17,15 @@ export class UsersService {
 
   async getAll(): Promise<User[] | null> {
     return await this.userRepository.findAll({
-      attributes: ['id', 'name', 'phoneNumber', 'lastName', 'isEnabled']
+      attributes: [
+        'id',
+        'name',
+        'phoneNumber',
+        'lastName',
+        'isEnabled',
+        'email',
+        'rolId'
+      ]
     });
   }
 
@@ -54,7 +62,7 @@ export class UsersService {
       if (existUser) return null;
 
       const response = await this.userRepository.create({
-        ...user
+        ...user,
       });
       return response;
     } catch (error) {

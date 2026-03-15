@@ -20,8 +20,14 @@ export class CategoriesController {
   constructor(private categoryService: CategoriesService) { }
 
   @Get()
-  async getAll() {
-    return await this.categoryService.getAll();
+  async getAll(
+    @Res() res: Response
+  ) {
+    const response = await this.categoryService.getAll();
+    return res.status(HttpStatus.OK).json({
+      success: true,
+      categories: response
+    });
   }
 
   @Get('/:id')

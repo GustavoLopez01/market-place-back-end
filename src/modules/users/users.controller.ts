@@ -7,12 +7,13 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Req,
   Res,
   ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import type { Response } from 'express';
+import type { Response, Request } from 'express';
 import { Public } from '../auth/isPublic';
 import { User } from './user.entity';
 
@@ -26,6 +27,33 @@ export class UsersController {
     return res.status(HttpStatus.OK).json({
       success: true,
       users: response
+    });
+  }
+
+  @Get('/get-user')
+  async getUserByToken(
+    @Req() req: Request,
+    @Res() res: Response
+  ) {
+    const user = req["user"];
+    if (!user?.username) {
+      return res.status(HttpStatus.OK).json({
+        success: false,
+        message: 'El id del usuario es requerido.'
+      });
+    }
+
+    const response = await this.userService.findOne(user.username);
+    if (!response) {
+      return res.status(HttpStatus.OK).json({
+        success: false,
+        message: `No existe usuario con correo electrónico ${user.username}`
+      });
+    }
+
+    return res.status(HttpStatus.OK).json({
+      success: true,
+      user: response
     });
   }
 
@@ -54,7 +82,7 @@ export class UsersController {
   @Post()
   @Public()
   async save(
-    @Body(new ValidationPipe()) createUser: CreateUserDto,
+    @Body() createUser: CreateUserDto,
     @Res() res: Response
   ) {
     const response = await this.userService.save(createUser);
