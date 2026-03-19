@@ -14,12 +14,7 @@ import * as bcrypt from 'bcrypt';
 import { Rol } from 'src/modules/roles/rol.entity';
 import { UserAddresses } from '../user_addresses/userAddress.entity';
 @Table({
-  tableName: 'users',
-  defaultScope: {
-    attributes: {
-      exclude: ['password']
-    }
-  }
+  tableName: 'users'
 })
 export class User extends Model {
 

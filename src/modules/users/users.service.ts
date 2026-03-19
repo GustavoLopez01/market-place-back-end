@@ -93,4 +93,23 @@ export class UsersService {
       throw new BadRequestException('Ocurrió un error al actualizar el usuario');
     }
   }
+
+  async delete(id: User['id']): Promise<Boolean> {
+    try {
+      const exist = await User.findOne({ where: { id } });
+      if (!exist) {
+        return false;
+      }
+
+      await this.userRepository.destroy({
+        where: {
+          id
+        }
+      });
+      return true;
+    } catch (error) {
+      console.error(`Ocurrió un error al eliminar el usuario : ${error}`);
+      throw new BadRequestException('Ocurrió un error al eliminar el usuario');
+    }
+  }
 }

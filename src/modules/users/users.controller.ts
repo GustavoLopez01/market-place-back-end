@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -9,7 +10,6 @@ import {
   Put,
   Req,
   Res,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -120,6 +120,28 @@ export class UsersController {
     return res.status(HttpStatus.OK).json({
       success: true,
       user: response
+    });
+  }
+
+  @Delete('/:id')
+  async delete(
+    @Param('id', new ParseIntPipe({
+      errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE
+    }))
+    id: User['id'],
+    @Res() res: Response
+  ) {
+    const response = await this.userService.delete(id);
+    if (!response) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        success: false,
+        message: `No existe usuario con id ${id}`
+      });
+    }
+
+    return res.status(HttpStatus.OK).json({
+      success: true,
+      message: 'Usuario eliminado correcta'
     });
   }
 }
