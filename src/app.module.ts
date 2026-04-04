@@ -10,6 +10,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { AddressesModule } from './modules/user_addresses/userAddresses.module';
+import { MulterModule } from '@nestjs/platform-express';
 @Module({
   imports: [
     AuthModule,
@@ -19,7 +20,10 @@ import { AddressesModule } from './modules/user_addresses/userAddresses.module';
     CategoriesModule,
     OrdersModule,
     RolesModule,
-    AddressesModule
+    AddressesModule,
+    MulterModule.register({
+      dest: "./uploads"
+    })
   ],
   controllers: [AppController, ProductsController],
   providers: [AppService],

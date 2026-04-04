@@ -1,4 +1,5 @@
 
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsNumber,
@@ -11,16 +12,19 @@ export class CreateProduct {
   })
   name: string;
 
+  @Type(() => Number)
   @IsNumber({}, {
     message: 'El precio debe ser un número'
   })
   price: number;
 
+  @Type(() => Number)
   @IsNumber({}, {
     message: 'La cantidad debe ser un número'
   })
   quantity: number;
 
+  @Type(() => Number)
   @IsNotEmpty({
     message: 'El id de la categoria no debe ser vacío'
   })

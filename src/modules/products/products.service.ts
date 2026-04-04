@@ -6,6 +6,8 @@ import {
 import { Product } from './product.entity';
 import { CreateProduct } from './dto/product.dto';
 import { Category } from 'src/modules/categories/category.entity';
+import { join } from 'path';
+import { createReadStream, ReadStream, existsSync } from 'fs';
 
 @Injectable()
 export class ProductsService {
@@ -26,6 +28,22 @@ export class ProductsService {
     } catch (error) {
       console.error(`Ocurrió un error al obtener el producto: ${error}`);
       throw new BadRequestException(`Ocurrió un error al obtener el producto: ${error}`);
+    }
+  }
+
+  async findImageByProductId(id: Product['id']): Promise<ReadStream | null> {
+    try {
+      const response = await this.findById(id);
+      if (response?.id) {
+        const filePath = join(process.cwd(), `uploads/${response.image}`);
+        if (!existsSync(filePath)) return null;
+        return createReadStream(filePath)
+      }
+
+      return null;
+    } catch (error) {
+      console.error(`Ocurrió un error al obtener la imagen del producto : ${error}`);
+      throw new BadRequestException(`Ocurrió un error al obtener la imagen del producto : ${error}`);
     }
   }
 
