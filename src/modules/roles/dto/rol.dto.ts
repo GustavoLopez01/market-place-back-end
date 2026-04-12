@@ -4,11 +4,11 @@ export class CreateRol {
   @IsString({
     message: 'El nombre debe ser una cadena de caracteres'
   })
-  name: string;
+  name!: string;
 
   @IsString({
     message: 'El nombre debe ser una cadena de caracteres'
   })
-  description: string;
+  description!: string;
 
 }

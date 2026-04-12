@@ -13,7 +13,7 @@ import {
 import { RolesService } from './roles.service';
 import { Rol } from './rol.entity';
 import type { Response } from 'express';
-import { Public } from '../auth/isPublic';
+import { CreateRol } from './dto/rol.dto';
 
 @Controller('roles')
 export class RolesController {
@@ -50,10 +50,9 @@ export class RolesController {
     });
   }
 
-  @Public()
   @Post()
   async save(
-    @Body() rol: Rol,
+    @Body() rol: CreateRol,
     @Res() res: Response
   ) {
     const response = await this.rolesService.save(rol);
@@ -66,7 +65,7 @@ export class RolesController {
 
     return res.status(HttpStatus.OK).json({
       success: true,
-      rol: response
+      role: response
     });
   }
 
@@ -76,7 +75,7 @@ export class RolesController {
       errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE
     }))
     id: Rol['id'],
-    @Body() rol: Rol,
+    @Body() rol: CreateRol,
     @Res() res: Response
   ) {
     const response = await this.rolesService.update(id, rol);
@@ -89,7 +88,7 @@ export class RolesController {
 
     return res.status(HttpStatus.OK).json({
       success: true,
-      rol: response
+      role: response
     });
   }
 

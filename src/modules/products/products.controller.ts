@@ -71,7 +71,7 @@ export class ProductsController {
         success: false,
         message: `No existe imagen del producto con id ${id}`
       });
-    }    
+    }
     return response.pipe(res);
   }
 

@@ -36,6 +36,9 @@ export class RolesService {
 
       if (existRol) return null;
 
+      console.log({rol});
+      
+
       const response = await this.rolRepository.create({ ...rol });
       return response;
     } catch (error) {
@@ -47,13 +50,11 @@ export class RolesService {
   async update(id: Rol['id'], rol: CreateRol) {
     try {
       const existRol = await this.rolRepository.findByPk(id);
-      if (existRol) return null;
+      if (!existRol) return null;
 
-      const response = await this.rolRepository.update({
+      const response = await existRol.update({
         ...rol
-      }, {
-        where: id
-      });
+      })
 
       return response;
     } catch (error) {
@@ -65,11 +66,11 @@ export class RolesService {
   async delete(id: Rol['id']) {
     try {
       const existRol = await this.rolRepository.findByPk(id);
-      if (existRol) return null;
+      if (!existRol) return null;
 
-      return await this.rolRepository.destroy({
-        where: id
-      });
+      await existRol.destroy();
+
+      return true;
     } catch (error) {
       console.error(`Ocurrió un error al eliminar el rol : ${error}`);
       throw new BadRequestException(`Ocurrió un error al eliminar el rol : ${error}`);
