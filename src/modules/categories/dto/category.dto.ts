@@ -12,13 +12,13 @@ export class CreateCategoryDto {
   @IsString({
     message: 'El nombre debe ser una cadena de caracteres'
   })
-  name: string
+  declare name: string
 
   @Length(10, 150, {
-    message: 'El nombre debe tener entre 10 y 150 caracteres'
+    message: 'La descripción debe tener entre 10 y 150 caracteres'
   })
   @IsString({
-    message: 'El nombre debe ser una cadena de caracteres'
+    message: 'La descripción debe ser una cadena de caracteres'
   })
-  description: string
+  declare description: string
 }

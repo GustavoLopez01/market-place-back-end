@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dto/category.dto';
+import { Product } from '../products/product.entity';
 
 @Injectable()
 export class CategoriesService {
@@ -38,7 +39,7 @@ export class CategoriesService {
           name: category.name
         }
       });
-      if(existCategory) return null;
+      if (existCategory) return null;
 
       return await this.categoryRepository.create({
         ...category
@@ -67,8 +68,15 @@ export class CategoriesService {
 
   async delete(id: Category['id']) {
     try {
-      const existCategory = await this.categoryRepository.findByPk(id);
+      const existCategory = await this.categoryRepository.findByPk(id, {
+        include: [Product]
+      });
       if (!existCategory) return null;
+
+      if (existCategory.products.length > 0) {
+        throw new BadRequestException(`La categoría tiene relacionados ${existCategory.products.length} productos`);
+      }
+
       return await existCategory.destroy();
     } catch (error) {
       console.error(`Ocurrió un error al eliminar la categoria : ${error}`);
